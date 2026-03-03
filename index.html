@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluent Battle AI</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0f2d, #1e1e50);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.card {
+    background: #2c2c5a;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 400px;
+}
+input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+}
+button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #6a00ff;
+    color: white;
+}
+</style>
+
+</head>
+<body>
+
+<h1>Fluent Battle AI 🎮</h1>
+
+<div class="card">
+<p id="question">Loading...</p>
+<input type="text" id="answer" placeholder="Type your answer">
+<br><br>
+<button onclick="checkAnswer()">Submit</button>
+<p id="result"></p>
+<p>Score: <span id="score">0</span></p>
+</div>
+
+<script>
+let questions = [
+{q:"Translate: Eu gosto de estudar",a:"I like to study"},
+{q:"Complete: She ___ going to school",a:"is"},
+{q:"Translate: Bom dia",a:"Good morning"}
+];
+
+let current=0;
+let score=0;
+
+function loadQuestion(){
+document.getElementById("question").innerText=questions[current].q;
+}
+
+function checkAnswer(){
+let user=document.getElementById("answer").value.trim();
+let correct=questions[current].a;
+
+if(user.toLowerCase()===correct.toLowerCase()){
+document.getElementById("result").innerText="Correct! 🎉";
+score+=10;
+}else{
+document.getElementById("result").innerText="Wrong! Correct: "+correct;
+}
+
+document.getElementById("score").innerText=score;
+current=(current+1)%questions.length;
+loadQuestion();
+document.getElementById("answer").value="";
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
